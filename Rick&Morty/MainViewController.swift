@@ -51,7 +51,6 @@ class MainViewController: UIViewController, CharactersCollectionViewDelegate {
     }
 
     private func setupNavigationBar() {
-        navigationController?.navigationBar.barTintColor = .white
         let titleLabel = UILabel()
         titleLabel.text = "Characters"
         titleLabel.textColor = .white
