@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SwiftUI
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, CharactersCollectionViewDelegate {
 
     private var collectionView: CharactersCollectionView!
 
@@ -23,7 +24,16 @@ class MainViewController: UIViewController {
     private func subviews() {
         collectionView = CharactersCollectionView(frame: .zero, characters: [])
         view.addSubview(collectionView)
+      collectionView.collectionDelegate = self
     }
+
+  func didSelectCharacter(_ character: Result) {
+      let characterDetailView = CharacterDetailView(character: character, navigateBack: {
+          self.navigationController?.popViewController(animated: true)
+      })
+      let hostingController = UIHostingController(rootView: characterDetailView)
+      navigationController?.pushViewController(hostingController, animated: true)
+  }
 
     func fetchCharacters() {
         let apiService = APIService()
@@ -42,7 +52,6 @@ class MainViewController: UIViewController {
 
     private func setupNavigationBar() {
         navigationController?.navigationBar.barTintColor = .white
-
         let titleLabel = UILabel()
         titleLabel.text = "Characters"
         titleLabel.textColor = .white

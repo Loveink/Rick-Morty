@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol CharactersCollectionViewDelegate: AnyObject {
+    func didSelectCharacter(_ character: Result)
+}
+
 class CharactersCollectionView: UICollectionView {
 
+  weak var collectionDelegate: CharactersCollectionViewDelegate?
   var characters: [Result] = []
 
   init(frame: CGRect, characters: [Result]) {
@@ -50,10 +55,18 @@ extension CharactersCollectionView: UICollectionViewDelegateFlowLayout, UICollec
     return cell
   }
 
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+          if indexPath.row < characters.count {
+              let selectedCharacter = characters[indexPath.row]
+              collectionDelegate?.didSelectCharacter(selectedCharacter)
+          }
+      }
+
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = collectionView.frame.width / 2.1
     let height = width + 50
 
     return CGSize(width: width, height: height)
   }
+
 }

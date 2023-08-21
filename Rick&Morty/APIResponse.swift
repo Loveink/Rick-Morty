@@ -28,7 +28,7 @@ struct Result: Decodable {
   let species: String
   let type: String
   let gender: Gender
-  let origin: Location
+  let origin: Origin
   let location: Location
   let image: String
   let episode: [String]
@@ -41,12 +41,17 @@ struct Result: Decodable {
   }
 }
 
+struct Origin: Decodable {
+  let name: String
+  let url: String
+}
+
 struct Location: Decodable {
   let name: String
   let url: String
 }
 
-struct Episode: Decodable {
+struct Episode: Decodable, Identifiable {
   let id: Int
   let name: String
   let airDate: String
@@ -73,4 +78,12 @@ enum Status: String, Decodable {
   case alive = "Alive"
   case dead = "Dead"
   case unknown = "unknown"
+}
+
+struct LocationInfo: Decodable {
+    let id: Int
+    let name: String
+    let type: String
+    let dimension: String
+    let residents: [String]
 }

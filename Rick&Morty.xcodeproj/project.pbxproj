@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5705A1D72A935F190040E9E5 /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A1D62A935F190040E9E5 /* CharacterDetailViewController.swift */; };
+		5705A1D92A939BC80040E9E5 /* EpisodeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A1D82A939BC80040E9E5 /* EpisodeRowView.swift */; };
 		572E2ABB2A8FD96600B99EA2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E2ABA2A8FD96600B99EA2 /* AppDelegate.swift */; };
 		572E2ABD2A8FD96600B99EA2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E2ABC2A8FD96600B99EA2 /* SceneDelegate.swift */; };
 		572E2ABF2A8FD96600B99EA2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E2ABE2A8FD96600B99EA2 /* MainViewController.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5705A1D62A935F190040E9E5 /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
+		5705A1D82A939BC80040E9E5 /* EpisodeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeRowView.swift; sourceTree = "<group>"; };
 		572E2AB72A8FD96600B99EA2 /* Rick&Morty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rick&Morty.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		572E2ABA2A8FD96600B99EA2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		572E2ABC2A8FD96600B99EA2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +73,8 @@
 				5757E56D2A90B39800DBE4D4 /* APIResponse.swift */,
 				572E2ACE2A8FDE0A00B99EA2 /* CharactersCollectionView.swift */,
 				572E2AD02A8FDE2E00B99EA2 /* CharacterCell.swift */,
+				5705A1D62A935F190040E9E5 /* CharacterDetailViewController.swift */,
+				5705A1D82A939BC80040E9E5 /* EpisodeRowView.swift */,
 				572E2AC32A8FD96900B99EA2 /* Assets.xcassets */,
 				572E2AC52A8FD96900B99EA2 /* LaunchScreen.storyboard */,
 				572E2AC82A8FD96900B99EA2 /* Info.plist */,
@@ -151,6 +157,8 @@
 				572E2ABF2A8FD96600B99EA2 /* MainViewController.swift in Sources */,
 				572E2ABB2A8FD96600B99EA2 /* AppDelegate.swift in Sources */,
 				572E2ABD2A8FD96600B99EA2 /* SceneDelegate.swift in Sources */,
+				5705A1D92A939BC80040E9E5 /* EpisodeRowView.swift in Sources */,
+				5705A1D72A935F190040E9E5 /* CharacterDetailViewController.swift in Sources */,
 				5757E56C2A90B12900DBE4D4 /* APIService.swift in Sources */,
 				572E2AD12A8FDE2E00B99EA2 /* CharacterCell.swift in Sources */,
 			);
