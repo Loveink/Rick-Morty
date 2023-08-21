@@ -22,7 +22,7 @@ struct EpisodeRowView: View {
                             Text(episode.name)
                                 .foregroundColor(.white)
                                 .font(.headline)
-                                .padding(.bottom, 4) // Adjust the padding as needed
+                                .padding(.bottom, 4)
                             HStack {
                                 Text(episode.episode)
                                     .foregroundColor(.green)
