@@ -9,34 +9,51 @@ import UIKit
 
 class CharactersCollectionView: UICollectionView {
 
-  override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
-    let flowLayout = UICollectionViewFlowLayout()
-    flowLayout.minimumInteritemSpacing = 10
-    flowLayout.minimumLineSpacing = 10
-    flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 40) / 2, height: 200)
-    super.init(frame: frame, collectionViewLayout: flowLayout)
-    dataSource = self
-    delegate = self
-    register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseIdentifier)
+  var characters: [Result] = []
+
+  init(frame: CGRect, characters: [Result]) {
+    self.characters = characters
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    super.init(frame: frame, collectionViewLayout: layout)
+
+    configureCollection()
+
   }
 
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
+  func configureCollection() {
+    dataSource = self
+    delegate = self
+    showsHorizontalScrollIndicator = false
+    backgroundColor = .clear
+    register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.identifier)
+  }
 }
 
-extension CharactersCollectionView: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
+extension CharactersCollectionView: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseIdentifier, for: indexPath) as! CharacterCell
-        let title = "Character \(indexPath.item)"
-        let image = UIImage(named: "character\(indexPath.item)")
-        cell.configure(with: title, image: image ?? UIImage())
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return characters.count
+  }
 
-        return cell
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.identifier, for: indexPath) as! CharacterCell
+
+    if indexPath.row < characters.count {
+      let character = characters[indexPath.row]
+      cell.configureCell(character)
     }
+    return cell
+  }
+
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let width = collectionView.frame.width / 2.1
+    let height = width + 50
+
+    return CGSize(width: width, height: height)
+  }
 }

@@ -9,9 +9,7 @@ import UIKit
 
 class MainViewController: UIViewController {
 
-    private let collectionView = CharactersCollectionView()
-
-    private lazy var scrollView = UIScrollView()
+    private var collectionView: CharactersCollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,42 +17,48 @@ class MainViewController: UIViewController {
         subviews()
         setupConstraints()
         setupNavigationBar()
+        fetchCharacters()
     }
 
     private func subviews() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(collectionView)
+        collectionView = CharactersCollectionView(frame: .zero, characters: [])
+        view.addSubview(collectionView)
     }
 
+    func fetchCharacters() {
+        let apiService = APIService()
+        apiService.fetchCharacters { result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    self.collectionView.characters = response.results
+                    self.collectionView.reloadData()
+                }
+            case .failure(let error):
+                print("Error fetching characters:", error)
+            }
+        }
+    }
 
-  private func setupNavigationBar() {
-       navigationController?.navigationBar.barTintColor = .white
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.barTintColor = .white
 
-       let titleLabel = UILabel()
-       titleLabel.text = "Characters"
-       titleLabel.textColor = .white
-       titleLabel.font = UIFont.boldSystemFont(ofSize: 28)
-       titleLabel.sizeToFit()
-       let titleBarButton = UIBarButtonItem(customView: titleLabel)
-       navigationItem.leftBarButtonItem = titleBarButton
-   }
+        let titleLabel = UILabel()
+        titleLabel.text = "Characters"
+        titleLabel.textColor = .white
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 28)
+        titleLabel.sizeToFit()
+        let titleBarButton = UIBarButtonItem(customView: titleLabel)
+        navigationItem.leftBarButtonItem = titleBarButton
+    }
 
     private func setupConstraints() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            collectionView.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            collectionView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
